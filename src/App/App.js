@@ -6,6 +6,7 @@ import {
 import AppHeader from '../common/AppHeader';
 import NotFound from '../common/NotFound';
 import Login from '../user/login/Login';
+import Signup from '../user/signup/Signup';
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
@@ -32,7 +33,9 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home}></Route>  
             <Route path="/login"
-            render={(props) => <Login authenticated={this.state.authenticated} {...props} />}></Route>         
+              render={(props) => <Login authenticated={this.state.authenticated} {...props} />}></Route>         
+            <Route path="/signup"
+              render={(props) => <Signup authenticated={this.state.authenticated} {...props} />}></Route>
             <Route component={NotFound}></Route>
           </Switch>
         </div>
