@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Signup.css';
 import { Link, Redirect } from 'react-router-dom'
 import Alert from 'react-s-alert';
+import { signup } from '../../util/APIUtils';
 
 class Signup extends Component {
     render() {
@@ -29,7 +30,7 @@ class SignupForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
+            username: '',
             email: '',
             password: ''
         }
@@ -52,14 +53,20 @@ class SignupForm extends Component {
 
         const signUpRequest = Object.assign({}, this.state);
 
-        console.log('----- signup : ', signUpRequest)
+        signup(signUpRequest)
+        .then(response => {
+            Alert.success("You're successfully registered. Please login to continue!");
+            this.props.history.push("/login");
+        }).catch(error => {
+            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');            
+        });
     }
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
                 <div className="form-item">
-                    <input type="text" name="name" className="form-control" placeholder="Username"
+                    <input type="text" name="username" className="form-control" placeholder="Username"
                         value={this.state.name} onChange={this.handleInputChange} required/>
                 </div>
                 <div className="form-item">

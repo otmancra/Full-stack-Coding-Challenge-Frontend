@@ -43,16 +43,23 @@ class LoginForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();   
+        const {email, password} = this.state
 
-        const loginRequest = Object.assign({}, this.state);
-        console.log('--- login : ', loginRequest)
+        login(email, password)
+        .then(response => {
+            localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+            Alert.success("You're successfully logged in!");
+            this.props.history.push("/");
+        }).catch(error => {
+            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+        });
     }
     
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
                 <div className="form-item">
-                    <input type="email" name="email" 
+                    <input type="text" name="email" 
                         className="form-control" placeholder="Email"
                         value={this.state.email} onChange={this.handleInputChange} required/>
                 </div>
