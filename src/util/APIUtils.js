@@ -45,6 +45,13 @@ export function getShopsNeary(latitude, longitude) {
     });
 }
 
+export function removeShop(shopId) {
+    return request({
+        url: API_BASE_URL + "/api/likes/remove/shop/"+shopId,
+        method: 'DELETE',
+    });
+}
+
 export function likeShop(shopId) {
     return request({
         url: API_BASE_URL + "/api/like/shop/"+shopId,

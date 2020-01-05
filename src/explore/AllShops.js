@@ -30,8 +30,8 @@ class AllShops extends Component {
         if(!this.props.isGeolocationAvailable) Alert.error('Your browser does not support Geolocation!');
         else if(!this.props.isGeolocationEnabled) Alert.error('Geolocation is not enabled!');
         Alert.success("Getting the location data!");
-        getShopsNeary(33.5882262, -7.6338096)
-        //getShopsNeary(latitude, longitude)
+        //getShopsNeary(33.5882262, -7.6338096)
+        getShopsNeary(latitude, longitude)
         .then(response => {
             this.setState({shopsNeary: response, loading: false})
         }).catch(error => {
