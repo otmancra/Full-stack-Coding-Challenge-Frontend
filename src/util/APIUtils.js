@@ -45,6 +45,13 @@ export function getShopsNeary(latitude, longitude) {
     });
 }
 
+export function likeShop(shopId) {
+    return request({
+        url: API_BASE_URL + "/api/like/shop/"+shopId,
+        method: 'GET',
+    });
+}
+
 export function getFavoritesShops() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");

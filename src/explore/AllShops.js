@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './AllShops.css';
-import { getShopsNeary } from '../util/APIUtils'
+import { getShopsNeary, likeShop } from '../util/APIUtils'
 import Alert from 'react-s-alert';
 import { geolocated } from "react-geolocated";
 import LoadingIndicator from '../common/LoadingIndicator';
@@ -30,9 +30,19 @@ class AllShops extends Component {
         if(!this.props.isGeolocationAvailable) Alert.error('Your browser does not support Geolocation!');
         else if(!this.props.isGeolocationEnabled) Alert.error('Geolocation is not enabled!');
         Alert.success("Getting the location data!");
-        getShopsNeary(latitude, longitude)
+        getShopsNeary(33.5882262, -7.6338096)
+        //getShopsNeary(latitude, longitude)
         .then(response => {
             this.setState({shopsNeary: response, loading: false})
+        }).catch(error => {
+            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+        });
+    }
+
+    handleLikeBtn(id) {
+        likeShop(id)
+        .then(response => {
+            Alert.success("You liked "+id);
         }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });
@@ -59,7 +69,7 @@ class AllShops extends Component {
                                         <button type="submit" className="btn btn-danger">Dislike</button>
                                     </div>
                                     <div className="column">
-                                        <button type="submit" className="btn btn-primary">Like</button>
+                                        <button onClick={() => this.handleLikeBtn(shop.id)} type="submit" className="btn btn-primary">Like</button>
                                     </div>    
                                 </div>
                             </div>

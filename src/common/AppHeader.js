@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { ACCESS_TOKEN } from '../constants';
 import './AppHeader.css';
 
 class AppHeader extends Component {
