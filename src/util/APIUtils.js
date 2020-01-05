@@ -35,13 +35,23 @@ export function getCurrentUser() {
 }
 
 export function getShopsNeary(latitude, longitude) {
-    console.log('-***')
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
     }
 
     return request({
         url: API_BASE_URL + `/api/shops/near_by?latitude=${latitude}&longitude=${longitude}`,
+        method: 'GET'
+    });
+}
+
+export function getFavoritesShops() {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + "/api/liked/shops",
         method: 'GET'
     });
 }

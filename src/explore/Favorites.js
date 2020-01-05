@@ -1,55 +1,41 @@
 import React, { Component } from 'react';
 import './AllShops.css';
-import { getShopsNeary } from '../util/APIUtils'
+import { getFavoritesShops } from '../util/APIUtils'
 import Alert from 'react-s-alert';
-import { geolocated } from "react-geolocated";
 import LoadingIndicator from '../common/LoadingIndicator';
 import { ACCESS_TOKEN } from '../constants';
 
-class AllShops extends Component {
+class Favorites extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            shopsNeary: null,
+            favorites: null,
             loading: true
         };
     }
 
     componentDidMount() {
-        this.position()
-    }
-
-    position = async () => {
-        await navigator.geolocation.getCurrentPosition(
-          position =>  this.getUserLocationAndShopsNearBy(position.coords.latitude, position.coords.longitude), 
-          err => console.log(err)
-        );
-    }
-
-    getUserLocationAndShopsNearBy(latitude, longitude) {
-        if(!this.props.isGeolocationAvailable) Alert.error('Your browser does not support Geolocation!');
-        else if(!this.props.isGeolocationEnabled) Alert.error('Geolocation is not enabled!');
-        Alert.success("Getting the location data!");
-        getShopsNeary(latitude, longitude)
+        getFavoritesShops()
         .then(response => {
-            this.setState({shopsNeary: response, loading: false})
+            this.setState({favorites: response, loading: false})
         }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });
     }
 
     render() {
+        const { favorites, loading } = this.state
         if(localStorage.getItem(ACCESS_TOKEN) == null){
             this.props.history.push("/");
         }
 
-        if(this.state.loading) {
+        if(loading) {
             return <LoadingIndicator />
         }
         return (
             <div className="allshops-container">
-                {
-                    this.state.shopsNeary.map((shop, index) => {
+                {!favorites ?
+                    favorites.map((shop, index) => {
                         return (
                             <div key={`tab_${index}`} className="shop-content">
                                 <h1 className="shop-title">{shop.name}</h1>
@@ -65,15 +51,14 @@ class AllShops extends Component {
                             </div>
                         );
                     })
+                    :
+                    <div className="shop-content">
+                        <h1 className="shop-title">You don't have favorites yet</h1>
+                    </div>
                 }
             </div>
         );
     }
 }
 
-export default geolocated({
-    positionOptions: {
-        enableHighAccuracy: false,
-    },
-    userDecisionTimeout: 5000,
-})(AllShops); 
+export default Favorites; 

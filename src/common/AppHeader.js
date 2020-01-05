@@ -14,10 +14,13 @@ class AppHeader extends Component {
                     </div>
                     <div className="app-options">
                         <nav className="app-nav">
-                                { localStorage.getItem(ACCESS_TOKEN) ? (
+                                { this.props.authenticated ? (
                                     <ul>
                                         <li>
                                             <NavLink to="/allshops">Nearby Shops</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to="/favorites">my preferred shops</NavLink>
                                         </li>
                                         <li>
                                             <a onClick={this.props.onLogout}>Logout</a>
