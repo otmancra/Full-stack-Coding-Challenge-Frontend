@@ -1,27 +1,37 @@
-.login-container {
+
+.allshops-container {
+    margin-left: 35px;
     text-align: center;
 }
 
-
-.login-content {
+.shop-content {
     background: #fff;
     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
     border-radius: 2px;
-    width: 500px;
+    width: 250px;
     display: inline-block;
     margin-top: 30px;
-    vertical-align: middle;
-    position: relative;    
+    margin-right: 35px;
     padding: 35px;
 }
 
-.signup-link {
+.img {
+    width:150px;
+    height:150px;
+}
+
+.like-link {
     color: rgba(0, 0, 0, 0.65);
     font-size: 14px;
 }
 
-.login-title {
-    font-size: 1.5em;
+.deslike-link {
+    color: rgba(250, 3, 3, 0.65);
+    font-size: 14px;
+}
+
+.shop-title {
+    font-size: 0.7em;
     font-weight: 500;
     margin-top: 0;
     margin-bottom: 30px;

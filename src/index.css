@@ -113,6 +113,17 @@ a:hover {
   border-color: #40a9ff;
 }
 
+.btn-danger {
+  color: #fff;
+  background-color: #fa5757;
+  border-color: #fa5757;  
+} 
+
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active {
+background-color: #ff7373;
+border-color: #ff7373;
+}
+
 .btn-success {
     color: #fff;
     background-color: #52c41a;
@@ -229,4 +240,15 @@ a:hover {
   background: #fff;
   padding: 10px;
   color: rgba(0,0,0,.45);
+}
+
+
+.row {
+  display: table;
+  width: 100%; /*Optional*/
+  table-layout: fixed; /*Optional*/
+  border-spacing: 10px; /*Optional*/
+}
+.column {
+  display: table-cell;
 }
